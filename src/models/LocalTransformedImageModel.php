@@ -60,6 +60,10 @@ class LocalTransformedImageModel extends BaseTransformedImageModel implements Tr
 
             $sourceImageInfo = @getimagesize($sourceModel->getFilePath());
 
+            if (false === $sourceImageInfo) {
+                throw new ImagerException('Could not get image size', 500, $e);
+            }
+
             try {
                 $sourceSize = new Box($sourceImageInfo[0], $sourceImageInfo[1]);
                 $targetCrop = ImagerHelpers::getCropSize($sourceSize, $transform, $config->getSetting('allowUpscale', $transform));
@@ -70,7 +74,7 @@ class LocalTransformedImageModel extends BaseTransformedImageModel implements Tr
             }
         }
     }
-    
+
     /**
      * @param string $unit
      * @param int $precision
@@ -114,5 +118,5 @@ class LocalTransformedImageModel extends BaseTransformedImageModel implements Tr
         return base64_encode($image);
     }
 
-    
+
 }
