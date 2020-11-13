@@ -61,7 +61,7 @@ class LocalTransformedImageModel extends BaseTransformedImageModel implements Tr
             $sourceImageInfo = @getimagesize($sourceModel->getFilePath());
 
             if (false === $sourceImageInfo) {
-                throw new ImagerException('Could not get image size', 500, $e);
+                throw new ImagerException('Could not get image size', 500);
             }
 
             try {
